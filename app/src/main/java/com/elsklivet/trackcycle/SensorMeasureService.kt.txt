@@ -1,0 +1,286 @@
+package com.example.trackcycle
+
+import android.Manifest
+import android.app.AlertDialog
+import android.app.Service
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.hardware.*
+import android.location.Location
+import android.os.Binder
+import android.os.Build
+import android.os.Bundle
+import android.os.IBinder
+import android.util.Log
+import androidx.annotation.Nullable
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.*
+
+class SensorMeasureService : Service(), SensorEventListener, GoogleApiClient.ConnectionCallbacks,
+    GoogleApiClient.OnConnectionFailedListener,
+    LocationListener, {
+    private val DEBUG_TAG = "SensorMeasureService"
+
+    // Intervals
+    private var primaryInterval = 10000L;
+    private var fastestInterval = 5000L;
+
+    // Location Services
+    private lateinit var fusedLocationClient: FusedLocationProviderClient;
+    // Google Sign-In Client
+    // private lateinit var mSignInClient: GoogleSignInClient
+    // Google API Client
+    private lateinit var mGoogleApiClient: GoogleApiClient
+    // Location Request Binding
+    private lateinit var mLocationRequest: LocationRequest
+    // Current Location
+    private var mCurrentLocation: Location? = null
+    // GPS Listening
+    private var mGPSListening: Boolean = false
+    // Services Connected
+    private var mServicesConnected: Boolean = false
+
+    // XYZ from Accelerometer
+    private var mLinearAccelX: Float = 0f
+        get() = field
+    private var mLinearAccelY: Float = 0f
+        get() = field
+    private var mLinearAccelZ: Float = 0f
+        get() = field
+
+    // XYZ from Accelerometer
+    private var mGyroRotX: Float = 0f
+        get() = field
+    private var mGyroRotY: Float = 0f
+        get() = field
+    private var mGyroRotZ: Float = 0f
+        get() = field
+
+    // Sensor Manager
+    private lateinit var sensorManager: SensorManager
+    // (Linear) Accelerometer
+    private var accelerometer: Sensor? = null
+    // Gyroscope
+    private var gyroscope: Sensor? = null
+    // Motion Sensor
+    private var significantMotion: Sensor? = null
+    // CSV Lines Data
+    val csvData: MutableList<String> = ArrayList()
+
+    // Binding information
+    private val binder = LocalBinder()
+
+    // Moving sensor readings into this service should allow constant
+    // sensor measurement, even when the app is not foreground.
+
+    inner class LocalBinder: Binder() {
+        fun getService(): SensorMeasureService = this@SensorMeasureService
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        createLocationRequest()
+        buildGoogleApiClient()
+        mGoogleApiClient.connect()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
+        gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        significantMotion = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION)
+
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_NORMAL)
+
+        val triggerEventListener = object : TriggerEventListener() {
+            override fun onTrigger(event: TriggerEvent?) {
+                // Significant Motion Detected
+                // Will probably pulse some sort of trigger to start or stop location services
+                csvData.add("--SIGNIFICANT MOTION DETECTED--")
+            }
+        }
+        significantMotion?.also { sensor ->
+            sensorManager.requestTriggerSensor(triggerEventListener, sensor)
+        }
+
+        // No, bad
+        return binder;
+    }
+
+    private fun addDataLine() {
+        // lat,lon,alt,acc,speed,accelx,accely,accelz
+        val sb = StringBuilder()
+
+        // Location
+        if (mCurrentLocation != null) {
+            sb.append(mCurrentLocation!!.latitude.toString())
+            sb.append(",")
+            sb.append(mCurrentLocation!!.longitude.toString())
+            sb.append(",")
+            sb.append(mCurrentLocation!!.altitude.toString())
+            sb.append(",")
+            sb.append(mCurrentLocation!!.accuracy.toString())
+            sb.append(",")
+            sb.append(mCurrentLocation!!.speed.toString())
+            sb.append(",")
+        } else {
+            sb.append("0.0")
+            sb.append(",")
+            sb.append("0.0")
+            sb.append(",")
+            sb.append("0.0")
+            sb.append(",")
+            sb.append("0.0")
+            sb.append(",")
+            sb.append("0.0")
+            sb.append(",")
+        }
+
+        // Accelerometer
+        sb.append(mLinearAccelX.toString())
+        sb.append(",")
+        sb.append(mLinearAccelY.toString())
+        sb.append(",")
+        sb.append(mLinearAccelZ.toString())
+        sb.append(",")
+
+        // Gyroscope
+        sb.append(mGyroRotX.toString())
+        sb.append(",")
+        sb.append(mGyroRotY.toString())
+        sb.append(",")
+        sb.append(mGyroRotZ.toString())
+
+        sb.append("\n")
+        csvData.add(sb.toString())
+    }
+
+    private fun createLocationRequest() {
+        mLocationRequest = LocationRequest()
+        mLocationRequest.interval = primaryInterval;
+        mLocationRequest.fastestInterval = fastestInterval;
+        mLocationRequest.priority = Priority.PRIORITY_BALANCED_POWER_ACCURACY;
+    }
+
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(
+                this.requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this.requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this.requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                AlertDialog.Builder(this.requireContext())
+                    .setTitle("Location Required")
+                    .setMessage("Location permission required to use this application.")
+                    .setPositiveButton("OK", DialogInterface.OnClickListener {
+                            _, _ -> {
+                        ActivityCompat.requestPermissions(this.requireActivity(),
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                            1)
+                    }
+                    })
+                    .create()
+                    .show()
+            } else ActivityCompat.requestPermissions(this.requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+
+            return
+        }
+
+        // binding.tvUpdates.text = "On"
+        mGPSListening = true
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+            mGoogleApiClient, mLocationRequest, this);
+    }
+
+    private fun stopLocationUpdates() {
+        if (mGPSListening) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this)
+            // binding.tvUpdates.text = "Off"
+            mGPSListening = false
+        }
+    }
+
+    @Synchronized
+    private fun buildGoogleApiClient() {
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .addApi(LocationServices.API)
+            .build()
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event != null) {
+            var updated = false
+            when (event.sensor.type) {
+                Sensor.TYPE_LINEAR_ACCELERATION -> {
+                    val linearX = event.values[0]
+                    val linearY = event.values[1]
+                    val linearZ = event.values[2]
+
+                    // Update if greater than tuned threshold
+                    mLinearAccelX = linearX
+                    mLinearAccelY = linearY
+                    mLinearAccelZ = linearZ
+                    updated = true
+                }
+                Sensor.TYPE_GYROSCOPE -> {
+                    val gyroX = event.values[0]
+                    val gyroY = event.values[1]
+                    val gyroZ = event.values[2]
+
+                    // Update if greater than tuned threshold
+                    mGyroRotX = gyroX
+                    mGyroRotY = gyroY
+                    mGyroRotZ = gyroZ
+                    updated = true
+                }
+            }
+            if (updated) {
+                 addDataLine()
+            //     updateUI()
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        return // ?
+    }
+
+    override fun onConnected(bundle: Bundle?) {
+        mServicesConnected = true
+        startLocationUpdates()
+        // binding.tvUpdates.text = "Service Connected"
+    }
+
+    override fun onConnectionSuspended(code: Int) {
+        // binding.tvUpdates.text = "Suspended"
+        mServicesConnected = false
+        Log.e("firstFragment", "CONNECTION SUSPENDED TO GOOGLE API CLIENT!")
+    }
+
+    override fun onConnectionFailed(result: ConnectionResult) {
+        // binding.tvUpdates.text = "Failed"
+        mServicesConnected = false
+        Log.e("firstFragment", "FATAL CONNECTION FAILURE TO GOOGLE API CLIENT!")
+    }
+
+    override fun onLocationChanged(location: Location) {
+//        Toast.makeText(this.requireContext(), "Location changed", Toast.LENGTH_SHORT).show()
+        mCurrentLocation = location
+        csvData.add("--GPS LOCATION CHANGED--")
+        addDataLine()
+        // updateUI()
+    }
+}
