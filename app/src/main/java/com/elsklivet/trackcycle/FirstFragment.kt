@@ -684,6 +684,7 @@ class FirstFragment : Fragment(),
         if (mGPSListening
             && mGPSFirstFix
             && mGoogleApiClient.isConnected
+            && abs(abs(orientationAngles[0]) - abs(azimuthLastMajor)) < AZIMUTH_TRIGGER_DIFFERENCE
             && curr - lastTrigger >= GPS_CYCLE_OFF_TIME
         ) {
             lastTrigger = curr
