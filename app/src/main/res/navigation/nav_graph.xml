@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.elsklivet.trackcycle.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_MapFragment"
+            app:destination="@id/trackDisplayActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/trackDisplayActivity"
+        android:name="com.elsklivet.trackcycle.TrackDisplayActivity"
+        android:label="activity_track_display"
+        tools:layout="@layout/activity_track_display" />
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.elsklivet.trackcycle.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second" >
+        <action
+            android:id="@+id/action_secondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+</navigation>
