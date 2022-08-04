@@ -139,6 +139,8 @@ class FirstFragment : Fragment(),
     private var mBatteryScale: Int = 1
     private var mBatteryPct: Float = 0.0f
     private var mBatteryMicroAmps: Int = 0
+    private var mBatteryCapMAH: Int = 0
+    private var mBatteryEnergyNWH: Long = 0
 
     // Battery Receiver
     private var mBatInfoReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
@@ -148,6 +150,10 @@ class FirstFragment : Fragment(),
             mBatteryPct = mBatteryLevel * 100 / mBatteryScale.toFloat()
             mBatteryMicroAmps =
                 batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
+            mBatteryCapMAH =
+                batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
+            mBatteryEnergyNWH =
+                batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER)
         }
     }
 
@@ -437,7 +443,7 @@ class FirstFragment : Fragment(),
         }
         val writer = FileWriter(csv)
         // Header line
-        writer.write("lat,lon,alt,acc,speed,accelx,accely,accelz,gyrox,gyroy,gyroz,azimuth,pitch,roll,time,batpct,current\n")
+        writer.write("lat,lon,alt,acc,speed,accelx,accely,accelz,gyrox,gyroy,gyroz,azimuth,pitch,roll,time,batpct,current,capmah,engnwh\n")
         // Lines added
         for (line in csvData) {
             writer.write(line)
@@ -561,7 +567,7 @@ class FirstFragment : Fragment(),
     }
 
     private fun addDataLine() {
-        // lat,lon,alt,acc,speed,accelx,accely,accelz,gyrox,gyroy,gyroz,azimuth,pitch,roll,time,batpct,current
+        // lat,lon,alt,acc,speed,accelx,accely,accelz,gyrox,gyroy,gyroz,azimuth,pitch,roll,time,batpct,current,capmah,engnwh
         val sb = StringBuilder()
 
         // Location
@@ -621,6 +627,10 @@ class FirstFragment : Fragment(),
         sb.append(mBatteryPct.toString())
         sb.append(",")
         sb.append(mBatteryMicroAmps.toString())
+        sb.append(",")
+        sb.append(mBatteryCapMAH.toString())
+        sb.append(",")
+        sb.append(mBatteryEnergyNWH.toString())
 
         sb.append("\n")
         csvData.add(sb.toString())
