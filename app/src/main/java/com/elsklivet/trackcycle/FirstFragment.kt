@@ -169,8 +169,9 @@ class FirstFragment : Fragment(),
 
     // Trigger Variables
     private var lastAzimuthPoints: ArrayDeque<Float> = ArrayDeque(NUM_POINTS_TO_AVERAGE)
-    private var azimuthLastMajor = 0.0f
+    private var azimuthLastMajor = 0f
     private var lastTrigger = 0L
+    private var dutyCycleInitialized = false
 
 //    private lateinit var mService: SensorMeasureService
 //    private var mBound: Boolean = false
@@ -692,6 +693,15 @@ class FirstFragment : Fragment(),
         val curr = now.toMillis(false)
 //        Toast.makeText(this.requireContext(),"${mGPSListening} ${mGPSFirstFix} ${mGoogleApiClient.isConnected} ${curr - lastTrigger}",Toast.LENGTH_SHORT).show()
         val checkAngle = lastAzimuthPoints.average().toFloat()
+        // Really hacky fix for the fact that the GPS never turns off at the beginning
+        if (!dutyCycleInitialized
+            && azimuthLastMajor == 0f
+            && curr - lastTrigger >= GPS_CYCLE_OFF_TIME
+        ) {
+            azimuthLastMajor = checkAngle
+            dutyCycleInitialized = true
+        }
+        // Toast.makeText(this.requireContext(), "${abs(abs(checkAngle) - abs(azimuthLastMajor)).toString()}", Toast.LENGTH_SHORT).show()
         if (mGPSListening
             && mGPSFirstFix
             && mGoogleApiClient.isConnected
