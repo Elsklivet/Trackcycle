@@ -691,17 +691,18 @@ class FirstFragment : Fragment(),
         now.setToNow()
         val curr = now.toMillis(false)
 //        Toast.makeText(this.requireContext(),"${mGPSListening} ${mGPSFirstFix} ${mGoogleApiClient.isConnected} ${curr - lastTrigger}",Toast.LENGTH_SHORT).show()
+        val checkAngle = lastAzimuthPoints.average().toFloat()
         if (mGPSListening
             && mGPSFirstFix
             && mGoogleApiClient.isConnected
-            && abs(abs(orientationAngles[0]) - abs(azimuthLastMajor)) < AZIMUTH_TRIGGER_DIFFERENCE
+            && abs(abs(checkAngle) - abs(azimuthLastMajor)) < AZIMUTH_TRIGGER_DIFFERENCE
             && curr - lastTrigger >= GPS_CYCLE_OFF_TIME
         ) {
             lastTrigger = curr
             azimuthLastMajor = lastAzimuthPoints.average().toFloat()
             binding.tvUpdates.text = "Cycled Off"
             stopLocationUpdates()
-        }else if (abs(abs(orientationAngles[0]) - abs(azimuthLastMajor)) >= AZIMUTH_TRIGGER_DIFFERENCE) {
+        }else if (abs(abs(checkAngle) - abs(azimuthLastMajor)) >= AZIMUTH_TRIGGER_DIFFERENCE) {
             if (curr - lastTrigger > GPS_CYCLE_SAVE_THRESHOLD_TIME
                 && !mGPSListening
                 && mGoogleApiClient.isConnected
