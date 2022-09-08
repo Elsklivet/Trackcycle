@@ -22,12 +22,10 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.elsklivet.trackcycle.databinding.FragmentFirstBinding
+import com.elsklivet.trackcycle.databinding.FragmentDatacollectionBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
 import java.io.File
 import java.io.FileWriter
 import kotlin.math.abs
@@ -37,13 +35,13 @@ import kotlin.math.sqrt
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment(),
+class DataCollectionFragment : Fragment(),
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener,
     SensorEventListener {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentDatacollectionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -231,7 +229,7 @@ class FirstFragment : Fragment(),
                 super.onFirstFix(ttffMillis)
                 mGPSFirstFix = true
                 csvData.add("--GPS FIRST FIX LOCKED--\n")
-                // Toast.makeText(this@FirstFragment.requireContext(), "GPS Fix Locked", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this@DataCollectionFragment.requireContext(), "GPS Fix Locked", Toast.LENGTH_SHORT).show()
                 // timeToFirstFixMS = ttffMillis
                 // firstFixLock.open() //GPS has a signal and can transmit location, release the navigate thread
             }
@@ -269,7 +267,7 @@ class FirstFragment : Fragment(),
         now.setToNow()
         lastTrigger = now.toMillis(false)
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentDatacollectionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -712,7 +710,7 @@ class FirstFragment : Fragment(),
             azimuthLastMajor = lastAzimuthPoints.average().toFloat()
             binding.tvUpdates.text = "Cycled Off"
             stopLocationUpdates()
-        }else if (abs(abs(checkAngle) - abs(azimuthLastMajor)) >= AZIMUTH_TRIGGER_DIFFERENCE) {
+        } else if (abs(abs(checkAngle) - abs(azimuthLastMajor)) >= AZIMUTH_TRIGGER_DIFFERENCE) {
             if (curr - lastTrigger > GPS_CYCLE_SAVE_THRESHOLD_TIME
                 && !mGPSListening
                 && mGoogleApiClient.isConnected

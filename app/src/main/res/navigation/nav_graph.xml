@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.elsklivet.trackcycle.FirstFragment"
+        android:name="com.elsklivet.trackcycle.DataCollectionFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_datacollection">
 
         <action
             android:id="@+id/action_FirstFragment_to_MapFragment"
@@ -20,13 +20,4 @@
         android:name="com.elsklivet.trackcycle.TrackDisplayActivity"
         android:label="activity_track_display"
         tools:layout="@layout/activity_track_display" />
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.elsklivet.trackcycle.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
-        <action
-            android:id="@+id/action_secondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
 </navigation>
