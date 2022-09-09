@@ -37,20 +37,6 @@ class TrackDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
         title = "Trip History"
 
-        // val coordsSize: Int? = intent.extras?.get("size") as Int?
-
-        // if (coordsSize != null) {
-        //     var i = 0
-        //     while (i < coordsSize && intent.hasExtra("lat$i") && intent.hasExtra("lng$i")) {
-        //         // Intents are awful and I hate them
-        //         val lat = intent.extras!!.get("lat$i") as Double
-        //         val lng = intent.extras!!.get("lng$i") as Double
-        //         i++
-        //         coords.add(LatLng(lat,lng))
-        //     }
-        // }
-
-        // val args = intent.getBundleExtra("BUNDLE")
         val newCoords = intent.getParcelableArrayListExtra<LocationWrapper>("LOCATIONS")
         if (newCoords != null) {
             var last: Location? = null
@@ -92,9 +78,6 @@ class TrackDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
             return
         }
 
-        // test
-        // coords.add(LatLng(coords[0].latitude - 1, coords[0].longitude + 1))
-
         var unit = "m"
         if (distance >= 1000f) {
             distance /= 1000f
@@ -105,8 +88,6 @@ class TrackDisplayActivity : AppCompatActivity(), OnMapReadyCallback {
             MarkerOptions().position(coords[coords.lastIndex]).visible(true)
                 .title("Travelled ${distance.toString()} $unit")
         )
-        // another test
-        // mMap.addPolyline(PolylineOptions().add(coords[0]).add(LatLng(coords[0].latitude + 1, coords[0].longitude + 1)).color(Color.GREEN).width(5f))
 
         // Draw polyline
         mMap.addPolyline(PolylineOptions().addAll(coords).color(Color.RED).width(5f))
