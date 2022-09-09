@@ -24,7 +24,7 @@ For detailed contributing information, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Copyright Notices
 
-Some of the code included in this project draws from several sources, including [Google Developer documentation](https://developer.android.com/docs) which are licensed under the [Apache License v2.0](./APACHE-LICENSE.txt), and other academic projects (with express permission). We've done our best to attribute appropriate sources for code included in the project. If you feel that your work has been incorrectly attributed per the appropriate license, please contact @Elsklivet at <gmh33@pitt.edu> or <gavinmajetich@gmail.com>. I will do my best to remedy any attribution or copyright problems immediately.
+Some of the code included in this project draws from several sources, including [Google Developer documentation](https://developer.android.com/docs) which are licensed under the [Apache License v2.0](./APACHE-LICENSE.txt), and other academic projects (with express permission). We've done our best to attribute appropriate sources for code included in the project. If you feel that your work has been incorrectly attributed per the appropriate license, please contact @Elsklivet at <gmh33@pitt.edu> or <gavinmajetich@gmail.com>. Additionally, this project is intended only for academic research, and not resale, so most uses should fall under [fair use](https://www.copyright.gov/fair-use/) by nature of the project. Still, I will do my best to remedy any attribution or copyright problems immediately.
 
 Any original code in this project is licensed under the [GNU GPL v3](./GPL-LICENSE.txt).
 
