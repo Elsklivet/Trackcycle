@@ -215,8 +215,8 @@
 
     <Button
         android:id="@+id/button_gotomap"
-        android:layout_width="139dp"
-        android:layout_height="49dp"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
         android:text="Go To Map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -326,7 +326,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
         android:checked="true"
-        android:text="Duty Cycling"
+        android:text="Power Save Mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_api"
         app:layout_constraintTop_toBottomOf="@+id/divider"
@@ -339,7 +339,8 @@
         android:layout_marginTop="208dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
+        tools:layout_editor_absoluteX="1dp"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -362,26 +363,42 @@
             android:text="LEFT" />
 
         <Button
-            android:id="@+id/button_stop"
-            android:layout_width="126dp"
-            android:layout_height="162dp"
-            android:layout_weight="1"
-            android:text="STOP BIKE" />
-
-        <Button
             android:id="@+id/button_right"
             android:layout_width="125dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="RIGHT" />
+
+        <Button
+            android:id="@+id/button_stop"
+            android:layout_width="126dp"
+            android:layout_height="162dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="STOP BIKE"
+            app:strokeColor="@color/black"
+            tools:visibility="visible" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_see_data"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
+        android:text="SEE LIVE DATA"
+        app:layout_constraintBottom_toTopOf="@+id/button_gotomap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="144dp"
         android:layout_height="44dp"
         android:text="SAVE CSV"
-        app:layout_constraintBottom_toTopOf="@+id/button_gotomap"
+        app:layout_constraintBottom_toTopOf="@+id/button_see_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -391,7 +408,7 @@
     <Button
         android:id="@+id/button_toggle_gps"
         android:layout_width="144dp"
-        android:layout_height="45dp"
+        android:layout_height="44dp"
         android:text="TOGGLE GPS"
         app:layout_constraintBottom_toTopOf="@+id/button_save"
         app:layout_constraintEnd_toEndOf="parent"

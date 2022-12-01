@@ -14,7 +14,16 @@
         <action
             android:id="@+id/action_FirstFragment_to_MapFragment"
             app:destination="@id/trackDisplayActivity" />
+        <action
+            android:id="@+id/action_FirstFragment_to_SeeData"
+            app:destination="@+id/uiDataFragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/uiDataFragment"
+        android:name="com.elsklivet.trackcycle.uiDataFragment"
+        android:label="Second Fragment"
+        tools:layout="@layout/fragment_ui_data"/>
+
     <activity
         android:id="@+id/trackDisplayActivity"
         android:name="com.elsklivet.trackcycle.TrackDisplayActivity"

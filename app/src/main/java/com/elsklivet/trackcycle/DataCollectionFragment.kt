@@ -265,6 +265,11 @@ class DataCollectionFragment : Fragment(),
             intent.putParcelableArrayListExtra("LOCATIONS", mActivity.locations)
             startActivity(intent)
         }
+        binding.buttonSeeData.setOnClickListener {
+            val intent = Intent(mActivity, TrackDisplayActivity::class.java)
+            intent.putParcelableArrayListExtra("LOCATIONS", mActivity.locations)
+            startActivity(intent)
+        }
 
         binding.buttonSave.setOnClickListener { _ ->
             saveCSVData()
@@ -547,6 +552,10 @@ class DataCollectionFragment : Fragment(),
         csvData.add(sb.toString())
     }
 
+
+    // I NEED THIS
+
+
     private fun updateUI() {
         // Location
         if (mCurrentLocation != null) {
@@ -565,7 +574,6 @@ class DataCollectionFragment : Fragment(),
         binding.tvGyrox.text = mGyroRot[0].toString()
         binding.tvGyroy.text = mGyroRot[1].toString()
         binding.tvGyroz.text = mGyroRot[2].toString()
-
         binding.tvAzimuth.text = orientationAngles[0].toString() + "°"
         binding.tvPitch.text = orientationAngles[1].toString() + "°"
         binding.tvRoll.text = orientationAngles[2].toString() + "°"
