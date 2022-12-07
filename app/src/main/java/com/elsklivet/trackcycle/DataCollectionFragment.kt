@@ -56,7 +56,6 @@ class DataCollectionFragment : Fragment(),
 
     // Location Services
     private lateinit var locationManager: LocationManager
-
     private var locationProvider: LocationProvider? = null
     private lateinit var gnssStatusCallback: GnssStatus.Callback
     private lateinit var locationListener: LocationListener
@@ -266,9 +265,41 @@ class DataCollectionFragment : Fragment(),
             startActivity(intent)
         }
         binding.buttonSeeData.setOnClickListener {
-            val intent = Intent(mActivity, TrackDisplayActivity::class.java)
-            intent.putParcelableArrayListExtra("LOCATIONS", mActivity.locations)
-            startActivity(intent)
+            var visData = View.GONE
+            var visLogo = View.VISIBLE
+            if(binding.tvLogo.visibility == View.VISIBLE) {
+                visData = View.VISIBLE
+                visLogo = View.GONE
+            }
+            binding.tvLabelgyrox.visibility = visData
+            binding.tvLabelgyroy.visibility = visData
+            binding.tvLabelgyroz.visibility = visData
+            binding.tvLabelaccelx.visibility = visData
+            binding.tvLabelaccely.visibility = visData
+            binding.tvLabelaccelz.visibility = visData
+            binding.tvLabelaccuracy.visibility = visData
+            binding.tvLabelaltitude.visibility = visData
+            binding.tvLabelazimuth.visibility = visData
+            binding.tvLabelpitch.visibility = visData
+            binding.tvLabelroll.visibility = visData
+            binding.tvLabellat.visibility = visData
+            binding.tvLabellon.visibility = visData
+            binding.tvLabelspeed.visibility = visData
+            binding.tvAccelx.visibility = visData
+            binding.tvAccely.visibility = visData
+            binding.tvAccelz.visibility = visData
+            binding.tvGyrox.visibility = visData
+            binding.tvGyroy.visibility = visData
+            binding.tvGyroz.visibility = visData
+            binding.tvAccuracy.visibility = visData
+            binding.tvAltitude.visibility = visData
+            binding.tvAzimuth.visibility = visData
+            binding.tvPitch.visibility = visData
+            binding.tvRoll.visibility = visData
+            binding.tvLat.visibility = visData
+            binding.tvLon.visibility = visData
+            binding.tvSpeed.visibility = visData
+            binding.tvLogo.visibility = visLogo
         }
 
         binding.buttonSave.setOnClickListener { _ ->

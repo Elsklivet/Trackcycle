@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SeeData"
             app:destination="@+id/uiDataFragment"/>
+        <action
+            android:id="@+id/action_FirstFragment_to_uiDataActivity2"
+            app:destination="@id/uiDataActivity" />
     </fragment>
     <fragment
         android:id="@+id/uiDataFragment"
@@ -29,4 +32,9 @@
         android:name="com.elsklivet.trackcycle.TrackDisplayActivity"
         android:label="activity_track_display"
         tools:layout="@layout/activity_track_display" />
+    <activity
+        android:id="@+id/uiDataActivity"
+        android:name="com.elsklivet.trackcycle.uiDataActivity"
+        android:label="activity_ui_data"
+        tools:layout="@layout/fragment_ui_data" />
 </navigation>
