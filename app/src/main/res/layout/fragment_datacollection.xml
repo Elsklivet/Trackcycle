@@ -11,19 +11,17 @@
         android:id="@+id/tv_labelapi"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="API:"
+        android:text=" API:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_labelupdates" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_saving" />
 
     <TextView
         android:id="@+id/tv_api"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Not Connected"
         app:layout_constraintStart_toEndOf="@+id/tv_labelupdates"
-        app:layout_constraintTop_toBottomOf="@+id/tv_updates" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_saving" />
 
     <TextView
         android:id="@+id/tv_labelroll"
@@ -157,7 +155,7 @@
         android:id="@+id/tv_labelsaving"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Saving:"
+        android:text=" Saving:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelupdates" />
 
@@ -333,23 +331,44 @@
         app:layout_constraintTop_toTopOf="@+id/tv_labelspeed" />
 
     <TextView
-        android:id="@+id/tv_logo"
-        android:visibility="visible"
+        android:id="@+id/tv_logo_track"
         android:layout_width="243dp"
-        android:layout_height="210dp"
-        android:gravity="center"
-        android:text="Track Cycle"
-        android:textSize="70dp"
+        android:layout_height="104dp"
         android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Track"
         android:textColor="@color/teal_900"
-        tools:layout_editor_absoluteX="84dp"
+        android:textSize="70dp"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/tv_logo_cycle"
+        android:layout_width="243dp"
+        android:layout_height="104dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Cycle"
+        android:textColor="@color/teal_900"
+        android:textSize="70dp"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="88dp" />
+
+    <ImageView
+        android:id="@+id/tv_biker_image"
+        android:layout_width="158dp"
+        android:layout_height="211dp"
+        android:src="@drawable/bike"
+        tools:layout_editor_absoluteX="234dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/tv_labelupdates"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Location:"
+        android:text=" Location:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/divider" />
 
@@ -365,10 +384,11 @@
         android:id="@+id/switch_smart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="28dp"
         android:checked="true"
         android:text="Power Save Mode"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toEndOf="@+id/tv_api"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:checked="true" />
@@ -429,10 +449,10 @@
         android:text="SEE LIVE DATA"
         app:layout_constraintBottom_toTopOf="@+id/button_gotomap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.939" />
 
     <Button
         android:id="@+id/button_save"
@@ -441,10 +461,10 @@
         android:text="SAVE CSV"
         app:layout_constraintBottom_toTopOf="@+id/button_see_data"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.914" />
 
     <Button
         android:id="@+id/button_toggle_gps"
@@ -453,9 +473,9 @@
         android:text="TOGGLE GPS"
         app:layout_constraintBottom_toTopOf="@+id/button_save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.965" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

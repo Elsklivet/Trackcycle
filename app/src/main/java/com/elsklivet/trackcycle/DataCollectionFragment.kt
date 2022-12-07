@@ -267,7 +267,7 @@ class DataCollectionFragment : Fragment(),
         binding.buttonSeeData.setOnClickListener {
             var visData = View.GONE
             var visLogo = View.VISIBLE
-            if(binding.tvLogo.visibility == View.VISIBLE) {
+            if(binding.tvLogoTrack.visibility == View.VISIBLE) {
                 visData = View.VISIBLE
                 visLogo = View.GONE
             }
@@ -299,7 +299,9 @@ class DataCollectionFragment : Fragment(),
             binding.tvLat.visibility = visData
             binding.tvLon.visibility = visData
             binding.tvSpeed.visibility = visData
-            binding.tvLogo.visibility = visLogo
+            binding.tvLogoTrack.visibility = visLogo
+            binding.tvLogoCycle.visibility = visLogo
+            binding.tvBikerImage.visibility = visLogo
         }
 
         binding.buttonSave.setOnClickListener { _ ->
