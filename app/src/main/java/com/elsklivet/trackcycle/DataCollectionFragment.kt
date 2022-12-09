@@ -151,7 +151,7 @@ class DataCollectionFragment : Fragment(),
     private val GPS_START_TIME = 14L * 1000L
     private val GPS_CYCLE_SAVE_THRESHOLD_TIME = 10L * 1000L
     private val GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
-    private val AZIMUTH_TRIGGER_DIFFERENCE = 60
+    private var AZIMUTH_TRIGGER_DIFFERENCE = 40
     private val NUM_POINTS_TO_AVERAGE = 1000
 
     // Trigger Variables
@@ -263,6 +263,28 @@ class DataCollectionFragment : Fragment(),
             val intent = Intent(mActivity, TrackDisplayActivity::class.java)
             intent.putParcelableArrayListExtra("LOCATIONS", mActivity.locations)
             startActivity(intent)
+        }
+        binding.buttonAzimuth.setOnClickListener {
+            if(binding.buttonAzimuth.text == "Azimuth: 40"){
+                binding.buttonAzimuth.text = "Azimuth: 50"
+                AZIMUTH_TRIGGER_DIFFERENCE = 50
+            }
+            else if(binding.buttonAzimuth.text == "Azimuth: 50"){
+                binding.buttonAzimuth.text = "Azimuth: 60"
+                AZIMUTH_TRIGGER_DIFFERENCE = 60
+            }
+            else if(binding.buttonAzimuth.text == "Azimuth: 60"){
+                binding.buttonAzimuth.text = "Azimuth: 70"
+                AZIMUTH_TRIGGER_DIFFERENCE = 70
+            }
+            else if(binding.buttonAzimuth.text == "Azimuth: 70"){
+                binding.buttonAzimuth.text = "Azimuth: 80"
+                AZIMUTH_TRIGGER_DIFFERENCE = 80
+            }
+            else if(binding.buttonAzimuth.text == "Azimuth: 80"){
+                binding.buttonAzimuth.text = "Azimuth: 40"
+                AZIMUTH_TRIGGER_DIFFERENCE = 40
+            }
         }
         binding.buttonSeeData.setOnClickListener {
             var visData = View.GONE
