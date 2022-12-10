@@ -25,129 +25,129 @@
 
     <TextView
         android:id="@+id/tv_labelroll"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Roll:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_labelazimuth" />
 
     <TextView
         android:id="@+id/tv_roll"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="0.00°"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labelazimuth"
         app:layout_constraintTop_toBottomOf="@+id/tv_speed" />
 
     <TextView
         android:id="@+id/tv_labelpitch"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Pitch:"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tv_labelroll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_labelazimuth" />
 
     <TextView
         android:id="@+id/tv_pitch"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="0.00°"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tv_roll"
         app:layout_constraintStart_toEndOf="@+id/tv_labelazimuth"
         app:layout_constraintTop_toBottomOf="@+id/tv_speed" />
 
     <TextView
         android:id="@+id/tv_labelazimuth"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Azimuth:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelspeed" />
 
     <TextView
         android:id="@+id/tv_azimuth"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="0.00°"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labelazimuth"
         app:layout_constraintTop_toBottomOf="@+id/tv_speed" />
 
     <TextView
         android:id="@+id/tv_labelgyrox"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="88dp"
         android:text="GyroX:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_labelgyroy"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="56dp"
         android:text="GyroY:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaccelx" />
 
     <TextView
         android:id="@+id/tv_gyroy"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="56dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toBottomOf="@+id/tv_accelx" />
 
     <TextView
         android:id="@+id/tv_labelgyroz"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="56dp"
         android:text="GyroZ:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaccely" />
 
     <TextView
         android:id="@+id/tv_gyroz"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="56dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toBottomOf="@+id/tv_accely" />
 
     <TextView
         android:id="@+id/tv_gyrox"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="88dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -169,63 +169,63 @@
 
     <TextView
         android:id="@+id/tv_labelaccelz"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:text="AccelZ:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaccely" />
 
     <TextView
         android:id="@+id/tv_accelz"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toBottomOf="@+id/tv_accely" />
 
     <TextView
         android:id="@+id/tv_labelaccelx"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="32dp"
         android:text="AccelX:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_accelx"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="32dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_labelaccely"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:text="AccelY:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaccelx" />
 
     <TextView
         android:id="@+id/tv_accely"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toBottomOf="@+id/tv_accelx" />
 
@@ -233,100 +233,102 @@
         android:id="@+id/button_gotomap"
         android:layout_width="144dp"
         android:layout_height="44dp"
+        android:layout_marginBottom="16dp"
         android:text="Go To Map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_labellat"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Lat:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_lat"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_labellon"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="lon:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labellat" />
 
     <TextView
         android:id="@+id/tv_lon"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labellon"
         app:layout_constraintTop_toBottomOf="@+id/tv_lat" />
 
     <TextView
         android:id="@+id/tv_labelaltitude"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Altitude:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labellon" />
 
     <TextView
         android:id="@+id/tv_altitude"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labelaltitude"
         app:layout_constraintTop_toTopOf="@+id/tv_labelaltitude" />
 
     <TextView
         android:id="@+id/tv_labelaccuracy"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Accuracy:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaltitude" />
 
     <TextView
         android:id="@+id/tv_accuracy"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labelaccuracy"
         app:layout_constraintTop_toTopOf="@+id/tv_labelaccuracy" />
 
     <TextView
         android:id="@+id/tv_labelspeed"
-        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Speed:"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaccuracy" />
 
     <TextView
         android:id="@+id/tv_speed"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_labelspeed"
         app:layout_constraintTop_toTopOf="@+id/tv_labelspeed" />
 
@@ -360,7 +362,7 @@
         android:layout_width="158dp"
         android:layout_height="211dp"
         android:src="@drawable/bike"
-        tools:layout_editor_absoluteX="233dp"
+        tools:layout_editor_absoluteX="230dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
@@ -399,8 +401,8 @@
         android:layout_marginTop="208dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -448,10 +450,10 @@
         android:text="SEE LIVE DATA"
         app:layout_constraintBottom_toTopOf="@+id/button_gotomap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.939" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_save"
@@ -463,7 +465,7 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.914" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_toggle_gps"
@@ -475,6 +477,16 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.965" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button_azimuth"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
+        android:text="Azimuth: 40"
+        app:layout_constraintBottom_toTopOf="@+id/button_toggle_gps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
