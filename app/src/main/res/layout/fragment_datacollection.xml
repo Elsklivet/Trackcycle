@@ -334,37 +334,33 @@
         android:id="@+id/tv_logo_track"
         android:layout_width="243dp"
         android:layout_height="104dp"
-        android:layout_marginStart="30dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:text="Track"
         android:textColor="@color/teal_900"
         android:textSize="70dp"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/tv_logo_cycle"
         android:layout_width="243dp"
         android:layout_height="104dp"
-        android:layout_marginBottom="50dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:text="Cycle"
         android:textColor="@color/teal_900"
         android:textSize="70dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/tv_saving"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteY="74dp" />
 
     <ImageView
         android:id="@+id/tv_biker_image"
         android:layout_width="158dp"
         android:layout_height="211dp"
-        android:layout_marginEnd="20dp"
         android:src="@drawable/bike"
-        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="233dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
