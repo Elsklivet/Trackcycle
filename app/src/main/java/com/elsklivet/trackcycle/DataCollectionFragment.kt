@@ -149,9 +149,9 @@ class DataCollectionFragment : Fragment(),
 
     // Constants
     private val GPS_START_TIME = 14L * 1000L
-    private val GPS_CYCLE_SAVE_THRESHOLD_TIME = 10L * 1000L
-    private val GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
-    private var AZIMUTH_TRIGGER_DIFFERENCE = 60
+    private var GPS_CYCLE_SAVE_THRESHOLD_TIME = 5L * 1000L
+    private var GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+    private var AZIMUTH_TRIGGER_DIFFERENCE = 40
     private val NUM_POINTS_TO_AVERAGE = 1000
 
     // Trigger Variables
@@ -284,6 +284,23 @@ class DataCollectionFragment : Fragment(),
             else if(binding.buttonAzimuth.text == "Azimuth: 80"){
                 binding.buttonAzimuth.text = "Azimuth: 40"
                 AZIMUTH_TRIGGER_DIFFERENCE = 40
+            }
+        }
+        binding.buttonCycletime.setOnClickListener {
+            if(binding.buttonCycletime.text == "Cycle-Time: 5"){
+                binding.buttonCycletime.text = "Cycle-Time: 10"
+                GPS_CYCLE_SAVE_THRESHOLD_TIME = 10L * 1000L
+                GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+            }
+            else if(binding.buttonCycletime.text == "Cycle-Time: 10"){
+                binding.buttonCycletime.text = "Cycle-Time: 15"
+                GPS_CYCLE_SAVE_THRESHOLD_TIME = 15L * 1000L
+                GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+            }
+            else if(binding.buttonCycletime.text == "Cycle-Time: 15"){
+                binding.buttonCycletime.text = "Cycle-Time: 5"
+                GPS_CYCLE_SAVE_THRESHOLD_TIME = 5L * 1000L
+                GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
             }
         }
         binding.buttonSeeData.setOnClickListener {
