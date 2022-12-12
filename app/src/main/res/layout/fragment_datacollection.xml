@@ -231,7 +231,7 @@
 
     <Button
         android:id="@+id/button_gotomap"
-        android:layout_width="144dp"
+        android:layout_width="155dp"
         android:layout_height="44dp"
         android:layout_marginBottom="16dp"
         android:text="Go To Map"
@@ -449,7 +449,7 @@
 
     <Button
         android:id="@+id/button_see_data"
-        android:layout_width="144dp"
+        android:layout_width="155dp"
         android:layout_height="44dp"
         android:text="SEE LIVE DATA"
         app:layout_constraintBottom_toTopOf="@+id/button_gotomap"
@@ -461,7 +461,7 @@
 
     <Button
         android:id="@+id/button_save"
-        android:layout_width="144dp"
+        android:layout_width="155dp"
         android:layout_height="44dp"
         android:text="SAVE CSV"
         app:layout_constraintBottom_toTopOf="@+id/button_see_data"
@@ -473,7 +473,7 @@
 
     <Button
         android:id="@+id/button_toggle_gps"
-        android:layout_width="144dp"
+        android:layout_width="155dp"
         android:layout_height="44dp"
         android:text="TOGGLE GPS"
         app:layout_constraintBottom_toTopOf="@+id/button_save"
@@ -485,10 +485,20 @@
 
     <Button
         android:id="@+id/button_azimuth"
-        android:layout_width="144dp"
+        android:layout_width="155dp"
         android:layout_height="44dp"
         android:text="Azimuth: 40"
         app:layout_constraintBottom_toTopOf="@+id/button_toggle_gps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/button_cycletime"
+        android:layout_width="155dp"
+        android:layout_height="44dp"
+        android:text="Cycle-Time: 5"
+        app:layout_constraintBottom_toTopOf="@+id/button_azimuth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"/>
