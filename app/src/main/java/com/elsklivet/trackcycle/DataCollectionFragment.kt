@@ -51,8 +51,8 @@ class DataCollectionFragment : Fragment(),
     private lateinit var mActivity: MainActivity
 
     // Intervals
-    private var primaryInterval = 1000L;
-    private var fastestInterval = 1000L;
+    private var primaryInterval = 1000L
+    private var fastestInterval = 1000L
 
     // Location Services
     private lateinit var locationManager: LocationManager
@@ -96,9 +96,6 @@ class DataCollectionFragment : Fragment(),
     // Compass Orientation Matrices
     private var rotationMatrix = FloatArray(9)
     private var orientationAngles = FloatArray(3)
-
-    // Alpha(s)
-    private var alpha = 0.1f
 
     // Sensor Manager
     private lateinit var sensorManager: SensorManager
@@ -265,51 +262,52 @@ class DataCollectionFragment : Fragment(),
             startActivity(intent)
         }
         binding.buttonAzimuth.setOnClickListener {
-            if(binding.buttonAzimuth.text == "Azimuth: 40"){
-                binding.buttonAzimuth.text = "Azimuth: 50"
-                AZIMUTH_TRIGGER_DIFFERENCE = 50
-            }
-            else if(binding.buttonAzimuth.text == "Azimuth: 50"){
-                binding.buttonAzimuth.text = "Azimuth: 60"
-                AZIMUTH_TRIGGER_DIFFERENCE = 60
-            }
-            else if(binding.buttonAzimuth.text == "Azimuth: 60"){
-                binding.buttonAzimuth.text = "Azimuth: 70"
-                AZIMUTH_TRIGGER_DIFFERENCE = 70
-            }
-            else if(binding.buttonAzimuth.text == "Azimuth: 70"){
-                binding.buttonAzimuth.text = "Azimuth: 80"
-                AZIMUTH_TRIGGER_DIFFERENCE = 80
-            }
-            else if(binding.buttonAzimuth.text == "Azimuth: 80"){
-                binding.buttonAzimuth.text = "Azimuth: 40"
-                AZIMUTH_TRIGGER_DIFFERENCE = 40
+            when (binding.buttonAzimuth.text) {
+                "Azimuth: 40" -> {
+                    binding.buttonAzimuth.text = "Azimuth: 50"
+                    AZIMUTH_TRIGGER_DIFFERENCE = 50
+                }
+                "Azimuth: 50" -> {
+                    binding.buttonAzimuth.text = "Azimuth: 60"
+                    AZIMUTH_TRIGGER_DIFFERENCE = 60
+                }
+                "Azimuth: 60" -> {
+                    binding.buttonAzimuth.text = "Azimuth: 70"
+                    AZIMUTH_TRIGGER_DIFFERENCE = 70
+                }
+                "Azimuth: 70" -> {
+                    binding.buttonAzimuth.text = "Azimuth: 80"
+                    AZIMUTH_TRIGGER_DIFFERENCE = 80
+                }
+                "Azimuth: 80" -> {
+                    binding.buttonAzimuth.text = "Azimuth: 40"
+                    AZIMUTH_TRIGGER_DIFFERENCE = 40
+                }
             }
         }
         binding.buttonCycletime.setOnClickListener {
-            if(binding.buttonCycletime.text == "Cycle-Time: 5"){
-                binding.buttonCycletime.text = "Cycle-Time: 10"
-                GPS_CYCLE_SAVE_THRESHOLD_TIME = 10L * 1000L
-                GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
-            }
-            else if(binding.buttonCycletime.text == "Cycle-Time: 10"){
-                binding.buttonCycletime.text = "Cycle-Time: 15"
-                GPS_CYCLE_SAVE_THRESHOLD_TIME = 15L * 1000L
-                GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
-            }
-            else if(binding.buttonCycletime.text == "Cycle-Time: 15"){
-                binding.buttonCycletime.text = "Cycle-Time: 5"
-                GPS_CYCLE_SAVE_THRESHOLD_TIME = 5L * 1000L
-                GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+            when (binding.buttonCycletime.text) {
+                "Cycle-Time: 5" -> {
+                    binding.buttonCycletime.text = "Cycle-Time: 10"
+                    GPS_CYCLE_SAVE_THRESHOLD_TIME = 10L * 1000L
+                    GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+                }
+                "Cycle-Time: 10" -> {
+                    binding.buttonCycletime.text = "Cycle-Time: 15"
+                    GPS_CYCLE_SAVE_THRESHOLD_TIME = 15L * 1000L
+                    GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+                }
+                "Cycle-Time: 15" -> {
+                    binding.buttonCycletime.text = "Cycle-Time: 5"
+                    GPS_CYCLE_SAVE_THRESHOLD_TIME = 5L * 1000L
+                    GPS_CYCLE_OFF_TIME = GPS_START_TIME + GPS_CYCLE_SAVE_THRESHOLD_TIME
+                }
             }
         }
         binding.buttonSeeData.setOnClickListener {
-            var visData = View.GONE
-            var visLogo = View.VISIBLE
-            if(binding.tvLogoTrack.visibility == View.VISIBLE) {
-                visData = View.VISIBLE
-                visLogo = View.GONE
-            }
+            val visData =  if (binding.tvLogoTrack.visibility != View.VISIBLE) View.GONE else View.VISIBLE
+            val visLogo =  if (binding.tvLogoTrack.visibility != View.VISIBLE) View.VISIBLE else View.GONE
+
             binding.tvLabelgyrox.visibility = visData
             binding.tvLabelgyroy.visibility = visData
             binding.tvLabelgyroz.visibility = visData
@@ -343,19 +341,19 @@ class DataCollectionFragment : Fragment(),
             binding.tvBikerImage.visibility = visLogo
         }
 
-        binding.buttonSave.setOnClickListener { _ ->
+        binding.buttonSave.setOnClickListener {
             saveCSVData()
         }
-        binding.buttonLeft.setOnClickListener { _ ->
+        binding.buttonLeft.setOnClickListener {
             csvData.add("--LEFT--\n")
         }
-        binding.buttonRight.setOnClickListener { _ ->
+        binding.buttonRight.setOnClickListener {
             csvData.add("--RIGHT--\n")
         }
-        binding.buttonStop.setOnClickListener { _ ->
+        binding.buttonStop.setOnClickListener {
             csvData.add("--STOP--\n")
         }
-        binding.buttonToggleGps.setOnClickListener { _ ->
+        binding.buttonToggleGps.setOnClickListener {
             if (mGPSListening) {
                 stopLocationUpdates()
             } else {
@@ -432,7 +430,7 @@ class DataCollectionFragment : Fragment(),
         name.append("_")
         name.append(now.format("%k-%M-%S")) // Current time
 
-        name.append("_${mDutyCyclingEnabled.toString()}.txt")
+        name.append("_${mDutyCyclingEnabled}.txt")
         val csv = File(
             this.requireContext().getExternalFilesDir(null)!!,
             name.toString()
@@ -560,15 +558,15 @@ class DataCollectionFragment : Fragment(),
 
         // Location
         if (mCurrentLocation != null) {
-            sb.append(mCurrentLocation!!.getLatitude().toString())
+            sb.append(mCurrentLocation!!.latitude.toString())
             sb.append(",")
-            sb.append(mCurrentLocation!!.getLongitude().toString())
+            sb.append(mCurrentLocation!!.longitude.toString())
             sb.append(",")
-            sb.append(mCurrentLocation!!.getAltitude().toString())
+            sb.append(mCurrentLocation!!.altitude.toString())
             sb.append(",")
-            sb.append(mCurrentLocation!!.getAccuracy().toString())
+            sb.append(mCurrentLocation!!.accuracy.toString())
             sb.append(",")
-            sb.append(mCurrentLocation!!.getSpeed().toString())
+            sb.append(mCurrentLocation!!.speed.toString())
             sb.append(",")
         } else {
             sb.append("0.0")
@@ -624,18 +622,14 @@ class DataCollectionFragment : Fragment(),
         csvData.add(sb.toString())
     }
 
-
-    // I NEED THIS
-
-
     private fun updateUI() {
         // Location
         if (mCurrentLocation != null) {
-            binding.tvLat.text = mCurrentLocation!!.getLatitude().toString()
-            binding.tvLon.text = mCurrentLocation!!.getLongitude().toString()
-            binding.tvAltitude.text = mCurrentLocation!!.getAltitude().toString()
-            binding.tvAccuracy.text = mCurrentLocation!!.getAccuracy().toString()
-            binding.tvSpeed.text = mCurrentLocation!!.getSpeed().toString()
+            binding.tvLat.text = mCurrentLocation!!.latitude.toString()
+            binding.tvLon.text = mCurrentLocation!!.longitude.toString()
+            binding.tvAltitude.text = mCurrentLocation!!.altitude.toString()
+            binding.tvAccuracy.text = mCurrentLocation!!.accuracy.toString()
+            binding.tvSpeed.text = mCurrentLocation!!.speed.toString()
         }
         // Accelerometer
         binding.tvAccelx.text = mLinearAccel[0].toString()
@@ -646,9 +640,9 @@ class DataCollectionFragment : Fragment(),
         binding.tvGyrox.text = mGyroRot[0].toString()
         binding.tvGyroy.text = mGyroRot[1].toString()
         binding.tvGyroz.text = mGyroRot[2].toString()
-        binding.tvAzimuth.text = orientationAngles[0].toString() + "°"
-        binding.tvPitch.text = orientationAngles[1].toString() + "°"
-        binding.tvRoll.text = orientationAngles[2].toString() + "°"
+        binding.tvAzimuth.text = "${orientationAngles[0]}°"
+        binding.tvPitch.text = "${orientationAngles[1]}°"
+        binding.tvRoll.text = "${orientationAngles[2]}°"
     }
 
     private fun updateOrientation() {
@@ -678,7 +672,7 @@ class DataCollectionFragment : Fragment(),
     }
 
     private fun dutyCycle() {
-        var now = Time(Time.getCurrentTimezone())
+        val now = Time(Time.getCurrentTimezone())
         now.setToNow()
         val curr = now.toMillis(false)
         val checkAngle = lastAzimuthPoints.average().toFloat()
@@ -714,19 +708,6 @@ class DataCollectionFragment : Fragment(),
             }
         }
     } //end function
-
-    private fun norm(x: Float, y: Float, z: Float): Float {
-        return sqrt((x * x + y * y + z * z).toDouble()).toFloat()
-    }
-
-    private fun clamp(input: Float, min: Float, max: Float): Float {
-        return if (input < min)
-            min
-        else if (input > max)
-            max
-        else
-            input
-    }
 
     private fun radToDeg(radians: Float): Float {
         return ((radians * 180.0f).toDouble() / Math.PI).toFloat()
@@ -793,8 +774,6 @@ class DataCollectionFragment : Fragment(),
         }
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        return // ?
-    }
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) { }
 
 }
